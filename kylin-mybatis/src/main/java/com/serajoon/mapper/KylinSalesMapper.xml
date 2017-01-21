@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.serajoon.mapper.KylinSalesMapper">
+	<cache />
+	<!-- #{value}:表示一个占位符 -->
+	<select id="kylinTestFind" resultType="kylinSalesPo">
+		select sum(price) as total_selled, count(distinct seller_id) as sellers from kylin_sales
+		group by part_dt
+	</select>
+</mapper>

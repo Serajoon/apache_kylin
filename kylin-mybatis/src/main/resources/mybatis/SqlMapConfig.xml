@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!--  <properties resource="mybatis/db.properties"></properties>-->
+	<settings>
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="false" />
+		<setting name="cacheEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<!-- 针对单个 type：类型的路径 alias:别名 -->
+		<!-- <typeAlias type="first.User" alias="user"/> -->
+		<!-- 批量别名定义 name:包名 自动扫描包的类，自动定义别名，别名就是类名。首字母大小写都可以 -->
+		<package name="com.serajoon" />
+	</typeAliases>
+</configuration>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="
+	    http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+">
+	<!-- 加载数据库配置文件 -->
+	<context:property-placeholder location="classpath:db.properties"/>
+	
+	
+	<!-- 数据源 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	
+	
+	<!-- SqlSessionFactory -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 加载mybatis配置文件 -->
+		<property name="configLocation" value="mybatis/SqlMapConfig.xml"></property>
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	
+	<!-- Mapper批量扫描，从mapper包中扫描mapper接口，自动创建代理对象并且在spring容器中注入
+		 因为是扫描所以ID不用 
+		 自动扫描的mapper的beanid为mapper类名首字母小写
+	-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 扫描的包名 此处写了 在mybatis配置文件中增加的package包扫描mapper配置也可以去掉
+		但是也要按照四个规范
+		扫描多个包，包中间用逗号分隔
+		-->
+		<property name="basePackage" value="com"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+	
+	<!-- 注解 扫描获得bean -->
+	<context:component-scan base-package="com"/>
+</beans>
