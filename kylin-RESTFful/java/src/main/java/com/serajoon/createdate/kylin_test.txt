@@ -1,0 +1,12 @@
+CREATE TABLE kylin_test
+(
+  UUID        INTEGER NOT NULL COMMENT '主键',
+  cont_money     FLOAT COMMENT '指标-1',
+  exec_money     FLOAT COMMENT '指标-2',
+  country_name   VARCHAR(32) COMMENT '维度-县区',
+  city_name	 VARCHAR(32) COMMENT '维度-城市',
+  provicen_name  VARCHAR(32) COMMENT '维度-省',
+  partition_timestamp TIMESTAMP COMMENT '数据生成时间戳-发送kylin rest时用',
+  partition_timestamp_utc TIMESTAMP COMMENT '数据UTC时间戳-kylin cube计算时参考的时间 kylin partiondate',
+  partition_timestamp_sqoop TIMESTAMP  COMMENT 'sqoop抽取数据时参考的时间 yyyy-mm-dd HH:00:00'
+);
