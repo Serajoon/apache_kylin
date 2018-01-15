@@ -71,7 +71,7 @@ public class KylinRestCube extends KylinHttpBasic {
 	 */
 	public static String buildCube(String cubeName, String body) {
 		String method = "PUT";
-		String para = "/cubes/" + cubeName + "/rebuild";
+		String para = "/cubes/" + cubeName + "/build";
 		return excute(para, method, body);
 	}
 
